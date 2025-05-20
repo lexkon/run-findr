@@ -47,7 +47,7 @@ export default function EventCard({ eventId }: Props) {
             <ul className="mt-4">
                 <li><strong>Distance:</strong> {event.distance} km</li>
                 <li><strong>Location:</strong> {event.location}</li>
-                <li><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</li>
+                <li><strong>Date:</strong> {event.event_date}</li>
                 <li><strong>Attendees:</strong> {event.attendees}</li>
             </ul>
         </div>
