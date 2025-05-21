@@ -1,6 +1,6 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Outfit, Bebas_Neue } from "next/font/google";
-import "./globals.css";
 import { UserProvider } from "@/context/UserContext";
 
 const outfit = Outfit({

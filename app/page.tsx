@@ -2,8 +2,11 @@
 
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
+import { useUser } from "@/context/UserContext";
 
 export default function Home() {
+  const { user, loading } = useUser()
+
   return (
     <>
       <Header />

@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase-client'
 
 type User = {
     id: string
@@ -25,10 +25,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const getUser = async () => {
-            const {
-                data: { user },
-                error
-            } = await supabase.auth.getUser()
+            const { data: { user }, error } = await supabase.auth.getUser()
 
             if (user) {
                 const { data: profile } = await supabase
@@ -42,6 +39,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
                     email: user.email!,
                     isStaff: profile?.is_staff ?? false
                 })
+            } else {
+                setUser(null)
             }
 
             setLoading(false)

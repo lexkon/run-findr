@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useUser } from '@/context/UserContext'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase-client'
 
 export default function Nav() {
     const { user, loading } = useUser()
@@ -24,11 +24,11 @@ export default function Nav() {
                 )}
                 {user && (
                     <>
-                        <Link href="/dashboard" className="p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md">
-                            Dashboard
+                        <Link href="/account" className="p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md">
+                            Account
                         </Link>
                         <button
-                            className="p-2 px-4 text-gray-700 font-medium bg-electric-violet-300 rounded-md"
+                            className="p-2 px-4 text-gray-700 font-medium bg-electric-violet-300 rounded-md hover:cursor-pointer"
                             onClick={async () => {
                                 await supabase.auth.signOut()
                                 location.reload()
