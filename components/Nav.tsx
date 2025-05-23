@@ -14,7 +14,7 @@ export default function Nav() {
             <ul className="text-center flex flex-row justify-around gap-2">
                 {!user && (
                     <>
-                        <Link href="/sign-up" className="p-2 px-4 font-medium text-white bg-electric-violet-600 rounded-md">
+                        <Link href="/sign-up" className="p-2 px-4 font-medium text-electric-violet-950 bg-electric-violet-200 border-2 border-electric-violet-700 rounded-md">
                             Sign Up
                         </Link>
                         <Link href="/login" className="p-2 px-4 font-medium text-white bg-gray-600 rounded-md">
