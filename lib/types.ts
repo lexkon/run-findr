@@ -4,6 +4,7 @@ export type RunningEvent = {
     distance: number
     location: string
     event_date: string
+    event_time: string
     attendees: number
     image_url: string
     description: string

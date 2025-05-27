@@ -8,7 +8,6 @@ export default function LoadingCard() {
 
                 <div className="h-40 w-full rounded bg-zinc-300 " />
 
-
                 <div className="space-y-2">
                     <div className="h-4 w-full rounded bg-zinc-300 " />
                     <div className="h-4 w-5/6 rounded bg-zinc-300 " />
