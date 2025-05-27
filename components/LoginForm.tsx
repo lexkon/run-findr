@@ -34,9 +34,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleLogin} className="space-y-4 max-w-sm mx-auto mt-8">
-            <h2 className="text-2xl font-semibold text-center">Log In</h2>
-
+        <form onSubmit={handleLogin} className="space-y-4 max-w-md mx-auto mt-4">
             <div>
                 <label className="block text-sm font-medium">Email</label>
                 <input

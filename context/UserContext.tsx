@@ -48,9 +48,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
         getUser()
 
-        const {
-            data: { subscription }
-        } = supabase.auth.onAuthStateChange(() => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
             getUser()
         })
 

@@ -15,9 +15,10 @@ export default function EventList() {
     const getEvents = async () => {
         try {
             setIsLoading(true)
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from('running_events')
                 .select('*')
+                .order('event_date', { ascending: true })
             if (data) setEvents(data as RunningEvent[]);
             console.log(data)
         } catch (error) {

@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Header />
       <main className='lg:mx-auto lg:max-w-5xl lg:self-center mb-16 mx-4 p-2'>
-        <h1 className='font-heading text-3xl text-electric-violet-950 font-bold mb-8 tracking-wide'>Where will your next run be?</h1>
+        <h1 className='font-heading text-3xl text-electric-violet-950 font-bold mb-8 tracking-wide'>Where will you run next?</h1>
         <div className="">
           <EventList />
         </div>
