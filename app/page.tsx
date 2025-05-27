@@ -11,9 +11,11 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className='m-4 p-2'>
-        <p className='text-lg font-bold mb-4'>This is the home page</p>
-        <EventList />
+      <main className='lg:mx-auto lg:max-w-5xl lg:self-center mb-16 mx-4 p-2'>
+        <h1 className='font-heading text-3xl text-electric-violet-950 font-bold mb-8 tracking-wide'>Where will your next run be?</h1>
+        <div className="">
+          <EventList />
+        </div>
       </main>
     </>
   );

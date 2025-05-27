@@ -13,6 +13,8 @@ export default function SignUpForm() {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
+
+    console.log(formData)
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')

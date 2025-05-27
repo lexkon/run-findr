@@ -11,7 +11,7 @@ export default function Nav() {
 
     return (
         <nav>
-            <ul className="text-center flex flex-row justify-around gap-2">
+            <ul className="text-center flex flex-row justify-around gap-2 md:m-2">
                 {!user && (
                     <>
                         <Link href="/sign-up" className="p-2 px-4 font-medium text-electric-violet-950 bg-electric-violet-200 border-2 border-electric-violet-700 rounded-md">
