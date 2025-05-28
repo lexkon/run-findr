@@ -32,54 +32,58 @@ export default function SignUpForm() {
     }
 
     return (
-        <form onSubmit={handleSignUp} className="space-y-4 max-w-sm mx-auto">
+        <form onSubmit={handleSignUp} className="space-y-4 max-w-sm md:max-w-md mx-auto">
             <div>
-                <label className="block text-sm font-medium text-gray-700">Display Name</label>
+                <label className="block text-md font-medium text-electric-violet-800 mb-1">Display Name</label>
                 <input
                     type="text"
                     required
+
                     value={formData.displayName}
                     onChange={(e) => setFormData({ ...formData, displayName: e.target.value })}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded border-electric-violet-950"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium">Email</label>
+                <label className="block text-md font-medium text-electric-violet-800 mb-1">Email</label>
                 <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded border-electric-violet-950"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium">Password</label>
+                <label className="block text-md font-medium text-electric-violet-800 mb-1">Password</label>
                 <input
                     type="password"
                     required
+                    placeholder=''
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded border-electric-violet-950"
                 />
             </div>
 
             {error && <p className="text-red-600 text-sm">{error}</p>}
-            {success && (
-                <p className="text-green-600 text-sm">
-                    Check your email to confirm your account!
-                </p>
-            )}
+            {
+                success && (
+                    <p className="text-green-600 text-sm font-bold">
+                        Check your email to confirm your account!
+                    </p>
+                )
+            }
 
             <button
                 type="submit"
-                className="w-full bg-[#7C3AED] text-white py-2 rounded-lg"
+                className="w-full bg-[#7C3AED] font-medium text-white py-2 rounded-lg"
                 disabled={loading}
             >
-                {loading ? 'Signing up...' : 'Sign Up'}
+                {loading ? 'Validating' : 'Sign Up'}
             </button>
-        </form>
+        </form >
     )
 }

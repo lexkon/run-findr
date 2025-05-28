@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase-client";
 import { RunningEvent } from "@/lib/types";
 import EventCard from "./EventCard";
 import LoadingCard from "./LoadingCard";
+import Link from "next/link";
 
 export default function EventList() {
 
@@ -20,9 +21,8 @@ export default function EventList() {
                 .select('*')
                 .order('event_date', { ascending: true })
             if (data) setEvents(data as RunningEvent[]);
-            console.log(data)
         } catch (error) {
-            console.log(error)
+            console.warn(error)
         }
         setIsLoading(false)
     }
@@ -37,8 +37,11 @@ export default function EventList() {
                 ? [...Array(loadingCardCount)].map((_, i) => (
                     <LoadingCard key={i} />
                 ))
-                : events.map((event) => (
-                    <EventCard key={event.id} event={event} />
+                : events.map((event, i) => (
+                    <Link href={`/run/${event.id}`} key={i}>
+                        <EventCard event={event} />
+                    </Link>
+
                 ))
             }
         </section>
