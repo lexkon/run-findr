@@ -7,6 +7,7 @@ type User = {
     id: string
     email: string
     isStaff: boolean
+    displayName: string
 } | null
 
 type UserContextType = {
@@ -37,7 +38,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
                 setUser({
                     id: user.id,
                     email: user.email!,
-                    isStaff: profile?.is_staff ?? false
+                    isStaff: profile?.is_staff ?? false,
+                    displayName: user.user_metadata.display_name
                 })
             } else {
                 setUser(null)
