@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import Header from '@/components/Header'
 import Image from 'next/image';
-import { formatDateWithWeekdayOrdinal, formatTime } from '@/lib/utils';
+import { formatDateWithWeekdayOrdinal, formatTime, formatDistance } from '@/lib/utils';
 
 type RunPageProps = {
     params: Promise<{ id: string }>;
@@ -22,7 +22,7 @@ export default async function RunPage({ params }: RunPageProps) {
     return (
         <>
             <Header />
-            <main className="mb-16 mx-4 p-6">
+            <main className="mb-16 mx-auto p-6">
                 <div className="absolute inset-0 -z-10 max-h-3/4">
                     <Image
                         src={run.image_url}
@@ -36,10 +36,10 @@ export default async function RunPage({ params }: RunPageProps) {
 
 
                 <div className='z-10'>
-                    <h1 className='font-heading text-6xl md:text-8xl font-bold tracking-normal bg-gradient-to-br from-electric-violet-600  to-electric-violet-400 bg-clip-text text-transparent'>{run.event_name}</h1>
-                    <p>{run.description}</p>
-                    <ul className="mt-2 space-y-1 text-md text-gray-600">
-                        <li><strong>Distance:</strong> {run.distance}km</li>
+                    <h1 className='font-heading text-6xl md:text-8xl font-bold tracking-normal bg-gradient-to-br from-electric-violet-600  to-electric-violet-400 bg-clip-text text-transparent mb-4'>{run.event_name}</h1>
+                    <p className='mt-2 font-medium text-electric-violet-950 md:text-lg'>{run.description}</p>
+                    <ul className="mt-2 space-y-1 font-medium md:text-lg">
+                        <li><strong>Distance:</strong> {formatDistance(run.distance)}</li>
                         <li><strong>When:</strong> {formatDateWithWeekdayOrdinal(run.event_date)} at {formatTime(run.event_time)}</li>
                         <li><strong>Location:</strong> {run.location}</li>
                     </ul>

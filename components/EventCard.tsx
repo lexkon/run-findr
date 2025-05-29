@@ -3,7 +3,7 @@
 import type { RunningEvent } from '@/lib/types'
 import Image from 'next/image'
 import LoadingCard from './LoadingCard'
-import { formatDateWithWeekdayOrdinal, formatTime } from '@/lib/utils'
+import { formatDateWithWeekdayOrdinal, formatDistance, formatTime } from '@/lib/utils'
 
 interface Props {
     event: RunningEvent
@@ -27,9 +27,9 @@ export default function EventCard({ event }: Props) {
                     className="rounded-lg"
                 />
             </div>
-            <p>{event.description}</p>
-            <ul className="mt-4">
-                <li><strong>Distance:</strong> {event.distance}km</li>
+            <p className="font-medium leading-tight">{event.description}</p>
+            <ul className="mt-4 font-normal">
+                <li><strong>Distance:</strong> {formatDistance(event.distance)}</li>
                 <li><strong>Location:</strong> {event.location}</li>
                 <li><strong>Date:</strong> {formatDateWithWeekdayOrdinal(event.event_date)}</li>
                 <li><strong>Time:</strong> {formatTime(event.event_time)}</li>

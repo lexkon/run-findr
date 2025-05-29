@@ -32,3 +32,17 @@ export function formatTime(timeString: string) {
 
     return `${displayHour}:${minute}${ampm}`
 }
+
+export function formatDistance(km: number): string {
+    if (km <= 0) return "Invalid distance";
+
+    const labels: Record<number, string> = {
+        1: "1 kilometre",
+        5: "5K",
+        10: "10K",
+        21: "Half marathon",
+        42: "Marathon",
+    };
+
+    return labels[km] ?? `${km}K`;
+}
