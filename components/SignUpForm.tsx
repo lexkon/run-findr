@@ -69,17 +69,15 @@ export default function SignUpForm() {
             </div>
 
             {error && <p className="text-red-600 text-sm">{error}</p>}
-            {
-                success && (
-                    <p className="text-green-600 text-sm font-bold">
-                        Check your email to confirm your account!
-                    </p>
-                )
-            }
+            {success && (
+                <p className="text-green-600 text-sm font-bold">
+                    Check your email to confirm your account!
+                </p>
+            )}
 
             <button
                 type="submit"
-                className="w-full bg-[#7C3AED] font-medium text-white py-2 rounded-lg"
+                className="w-full bg-electric-violet-600 font-medium text-white py-2 rounded-lg"
                 disabled={loading}
             >
                 {loading ? 'Validating' : 'Sign Up'}

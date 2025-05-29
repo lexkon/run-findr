@@ -37,8 +37,8 @@ export default async function RunPage({ params }: RunPageProps) {
 
                 <div className='z-10'>
                     <h1 className='font-heading text-6xl md:text-8xl font-bold tracking-normal bg-gradient-to-br from-electric-violet-600  to-electric-violet-400 bg-clip-text text-transparent mb-4'>{run.event_name}</h1>
-                    <p className='mt-2 font-medium text-electric-violet-950 md:text-lg'>{run.description}</p>
-                    <ul className="mt-2 space-y-1 font-medium md:text-lg">
+                    <p className='mb-4 font-medium text-lg text-electric-violet-800 md:text-2xl'>{run.description}</p>
+                    <ul className="space-y-1 font-medium md:text-lg">
                         <li><strong>Distance:</strong> {formatDistance(run.distance)}</li>
                         <li><strong>When:</strong> {formatDateWithWeekdayOrdinal(run.event_date)} at {formatTime(run.event_time)}</li>
                         <li><strong>Location:</strong> {run.location}</li>

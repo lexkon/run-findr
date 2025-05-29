@@ -34,26 +34,26 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleLogin} className="space-y-4 max-w-md mx-auto">
+        <form onSubmit={handleLogin} className="space-y-4 max-w-sm md:max-w-md mx-auto">
             <div>
-                <label className="block text-sm font-medium">Email</label>
+                <label className="block text-md font-medium text-electric-violet-800 mb-1">Email</label>
                 <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border border-electric-violet-950  rounded"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium">Password</label>
+                <label className="block text-md font-medium text-electric-violet-800 mb-1">Password</label>
                 <input
                     type="password"
                     required
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border border-electric-violet-950 rounded"
                 />
             </div>
 
@@ -64,7 +64,7 @@ export default function LoginForm() {
 
             <button
                 type="submit"
-                className="w-full bg-electric-violet-600 text-white py-2 rounded-lg"
+                className="w-full bg-electric-violet-600 font-medium text-white py-2 rounded-lg"
                 disabled={loading}
             >
                 {loading ? 'Logging in...' : 'Log In'}
