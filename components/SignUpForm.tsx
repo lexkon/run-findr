@@ -32,13 +32,13 @@ export default function SignUpForm() {
     }
 
     return (
-        <form onSubmit={handleSignUp} className="space-y-4 max-w-sm md:max-w-md mx-auto">
+        <form onSubmit={handleSignUp} className="space-y-4 w-xs md:w-sm mx-auto">
             <div>
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Display Name</label>
                 <input
                     type="text"
                     required
-
+                    autoComplete='on'
                     value={formData.displayName}
                     onChange={(e) => setFormData({ ...formData, displayName: e.target.value })}
                     className="w-full px-3 py-2 border rounded border-electric-violet-950"
@@ -49,6 +49,7 @@ export default function SignUpForm() {
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Email</label>
                 <input
                     type="email"
+                    autoComplete='on'
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -68,7 +69,7 @@ export default function SignUpForm() {
                 />
             </div>
 
-            {error && <p className="text-red-600 text-sm">{error}</p>}
+            {error && <p className="text-red-600 text-sm font-bold">{error}</p>}
             {success && (
                 <p className="text-green-600 text-sm font-bold">
                     Check your email to confirm your account!

@@ -34,11 +34,12 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleLogin} className="space-y-4 max-w-sm md:max-w-md mx-auto">
+        <form onSubmit={handleLogin} className="space-y-4 w-xs md:w-sm mx-auto">
             <div>
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Email</label>
                 <input
                     type="email"
+                    autoComplete='on'
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -57,9 +58,9 @@ export default function LoginForm() {
                 />
             </div>
 
-            {error && <p className="text-red-700 text-sm">{error}</p>}
+            {error && <p className="text-red-700 text-sm font-bold">{error}</p>}
             {success && (
-                <p className="text-green-700 text-sm">Successfully logged in!</p>
+                <p className="text-green-700 text-s font-bold">Successfully logged in!</p>
             )}
 
             <button

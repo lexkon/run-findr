@@ -24,7 +24,7 @@ export default function Nav() {
                 )}
                 {user && (
                     <>
-                        <Link href="/account" className="p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md">
+                        <Link href="/account" className="flex align-middle py-2 px-4  text-white font-medium bg-electric-violet-700 rounded-md">
                             Account
                         </Link>
                         <button
