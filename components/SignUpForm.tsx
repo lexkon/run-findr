@@ -32,7 +32,7 @@ export default function SignUpForm() {
     }
 
     return (
-        <form onSubmit={handleSignUp} className="space-y-4 w-xs md:w-sm mx-auto">
+        <form onSubmit={handleSignUp} className="space-y-4 w-xs md:w-sm mx-auto font-body">
             <div>
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Display Name</label>
                 <input
