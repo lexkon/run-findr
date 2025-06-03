@@ -35,7 +35,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         checkSignup()
     }, [user, runningEventId])
 
-    const handleSignup = async () => {
+    const handleRunSignup = async () => {
         if (!user) {
             alert('Please log in to sign up')
             return
@@ -76,7 +76,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
     if (loading || loadingStatus) return <p></p>
 
     if (!user) {
-        return <p>Please <a href="/login" className="text-electric-violet-600 underline">log in</a> or <a href="/sign-up" className="text-electric-violet-600 underline">sign up</a> to join this run.</p>
+        return <p className='font-medium text-md md:text-lg'>Please <a href="/login" className="text-electric-violet-600 underline">log in</a> or <a href="/sign-up" className="text-electric-violet-600 underline">sign up</a> to join this run.</p>
     }
 
     if (isSignedUp) {
@@ -88,5 +88,5 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         )
     }
 
-    return <button onClick={handleSignup} className="mt-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Join this run</button>
+    return <button onClick={handleRunSignup} className="mt-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Join this run</button>
 }
