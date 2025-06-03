@@ -20,7 +20,7 @@ export default function Admin() {
 
                 {!user && (
                     <>
-                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-8">Staff</h1>
+                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Staff</h1>
                         <p className="text-lg text-center mb-4 font-body font-medium text-neutral-700">You need to log in to access this page</p>
                         <LoginForm successPage={'/staff'} />
                     </>
@@ -28,7 +28,7 @@ export default function Admin() {
 
                 {user && !user.isStaff && (
                     <>
-                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-8">Unauthorised</h1>
+                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Unauthorised</h1>
                         <p className="text-lg md:text-xl text-center mb-1 font-body font-medium text-neutral-700">
                             {user.displayName ?
                                 `You don't have the necessary permissions to manage events, ${user.displayName.split(" ")[0]}.`
@@ -44,7 +44,7 @@ export default function Admin() {
 
                 {user && user.isStaff && (
                     <>
-                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-8">Create a new event</h1>
+                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Create a new event</h1>
                         <p className="text-lg md:text-lg text-center mb-4 font-body font-medium text-neutral-800">LFG, {user.displayName.split(" ")[0]}</p>
                     </>
                 )}
