@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useUser } from '@/context/UserContext'
 import { supabase } from '@/lib/supabase-client'
 import { RunningEvent } from '@/lib/types'
@@ -77,6 +78,20 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
 
     if (!user) {
         return <p className='font-medium text-md md:text-lg'>Please <a href="/login" className="text-electric-violet-600 underline">log in</a> or <a href="/sign-up" className="text-electric-violet-600 underline">sign up</a> to join this run.</p>
+    }
+
+    if (user.isStaff && isSignedUp) {
+        return (
+            <>
+                <p className="text-electric-violet-950 font-body font-semibold text-md mb-2 md:text-lg">{user ? `You're in, ${user.displayName.split(" ")[0]}!` : "You're in!"}</p>
+                <button onClick={handleDownloadICS} className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Add to calendar</button><br></br>
+                <Link
+                    href={`${runningEventId}/edit`}
+                    className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
+                    Edit
+                </Link >
+            </>
+        )
     }
 
     if (isSignedUp) {

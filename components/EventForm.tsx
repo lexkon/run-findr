@@ -1,8 +1,10 @@
+'use client'
+
 import { useState } from "react"
 import { supabase } from "@/lib/supabase-client"
 import Link from "next/link"
 
-export default function NewEventForm() {
+export default function EventForm() {
     const [formData, setFormData] = useState({
         eventName: '',
         eventDescription: '',

@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header";
 import LoginForm from "@/components/LoginForm";
-import NewEventForm from "@/components/NewEventForm";
+import NewEventForm from "@/components/EventForm";
 import { useUser } from "@/context/UserContext";
 
 export default function Admin() {
