@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import LoginForm from "@/components/LoginForm";
+import NewEventForm from "@/components/NewEventForm";
 import { useUser } from "@/context/UserContext";
 
 export default function Admin() {
@@ -44,8 +45,14 @@ export default function Admin() {
 
                 {user && user.isStaff && (
                     <>
-                        <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Create a new event</h1>
-                        <p className="text-lg md:text-lg text-center mb-4 font-body font-medium text-neutral-800">LFG, {user.displayName.split(" ")[0]}</p>
+                        <div className="text-center">
+                            <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold mb-4">Manage Events</h1>
+                            <div className="text-lg md:text-lg mb-4 font-body font-medium text-neutral-800">
+                                <p>Welcome, {user.displayName.split(" ")[0]}</p>
+                                <p>You can create, update, and delete runs</p>
+                            </div>
+                        </div>
+                        <NewEventForm />
                     </>
                 )}
             </main>

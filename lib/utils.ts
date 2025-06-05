@@ -38,8 +38,10 @@ export function formatDistance(km: number): string {
 
     const labels: Record<number, string> = {
         1: "1 kilometre",
+        1.6: "Mile",
         5: "5K",
         10: "10K",
+        16: "10 miles",
         21: "Half marathon",
         42: "Marathon",
     };
