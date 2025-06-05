@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase-client"
 import Link from "next/link"
+import { RunningEvent } from "@/lib/types"
 
-export default function EventForm() {
+export default function EventForm({ run }: { run: RunningEvent | null }) {
     const [formData, setFormData] = useState({
         eventName: '',
         eventDescription: '',
@@ -100,6 +101,21 @@ export default function EventForm() {
             eventImage: null
         })
     }
+
+    useEffect(() => {
+        if (run) {
+            setFormData((prev) => ({
+                ...prev,
+                eventName: run.event_name || '',
+                eventDescription: run.description || '',
+                eventLocation: run.location || '',
+                eventDistance: run.distance?.toString() || '',
+                eventDate: run.event_date || '',
+                eventTime: run.event_time || '',
+                // eventImage remains as is
+            }))
+        }
+    }, [run])
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 w-xs md:w-sm mx-auto font-body">

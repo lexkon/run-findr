@@ -7,7 +7,6 @@ import { supabase } from '@/lib/supabase-client'
 import { RunningEvent } from '@/lib/types'
 import { generateICS } from '@/lib/ics'
 
-
 export default function SignupFlow({ runningEventId, run }: { runningEventId: string, run: RunningEvent }) {
     const { user, loading } = useUser()
     const [isSignedUp, setIsSignedUp] = useState(false)
@@ -73,35 +72,61 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         })
     }
 
-
     if (loading || loadingStatus) return <p></p>
 
     if (!user) {
         return <p className='font-medium text-md md:text-lg'>Please <a href="/login" className="text-electric-violet-600 underline">log in</a> or <a href="/sign-up" className="text-electric-violet-600 underline">sign up</a> to join this run.</p>
     }
 
+    const signedUpMsg = (
+        <>
+            <p className="text-electric-violet-600 font-body font-semibold text-md mb-2 md:text-lg">
+                {`You're signed up, ${user.displayName.split(" ")[0]}!`}
+            </p>
+        </>
+    )
+    const addToCalendarBtn = (
+        <button onClick={handleDownloadICS} className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
+            Add to calendar
+        </button>
+    )
+    const joinBtn = (
+        <button onClick={handleRunSignup} className="mt-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
+            Join this run
+        </button>
+    )
+    const editBtn = (
+        <Link
+            href={`${runningEventId}/edit`}
+            className="m-2 py-2.5 px-4 text-white font-medium bg-electric-violet-400 rounded-md hover:cursor-pointer">
+            Edit Run Details
+        </Link>
+    )
+
     if (user.isStaff && isSignedUp) {
         return (
-            <>
-                <p className="text-electric-violet-950 font-body font-semibold text-md mb-2 md:text-lg">{user ? `You're in, ${user.displayName.split(" ")[0]}!` : "You're in!"}</p>
-                <button onClick={handleDownloadICS} className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Add to calendar</button><br></br>
-                <Link
-                    href={`${runningEventId}/edit`}
-                    className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
-                    Edit
-                </Link >
-            </>
+            <div>
+                {isSignedUp ? (
+                    <>
+                        {signedUpMsg}
+                        {addToCalendarBtn}
+                    </>
+                ) : (
+                    joinBtn
+                )}
+                {editBtn}
+            </div>
         )
     }
 
     if (isSignedUp) {
         return (
             <>
-                <p className="text-electric-violet-950 font-body font-semibold text-md mb-2 md:text-lg">{user ? `You're in, ${user.displayName.split(" ")[0]}!` : "You're in!"}</p>
-                <button onClick={handleDownloadICS} className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Add to calendar</button>
+                {signedUpMsg}
+                {addToCalendarBtn}
             </>
         )
     }
 
-    return <button onClick={handleRunSignup} className="mt-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">Join this run</button>
+    return joinBtn
 }
