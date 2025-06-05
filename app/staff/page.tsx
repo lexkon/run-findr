@@ -30,26 +30,28 @@ export default function Admin() {
                 {user && !user.isStaff && (
                     <>
                         <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Unauthorised</h1>
-                        <p className="text-lg md:text-xl text-center mb-1 font-body font-medium text-neutral-700">
-                            {user.displayName ?
-                                `You don't have the necessary permissions to manage events, ${user.displayName.split(" ")[0]}.`
-                                :
-                                "You don't have the necessary permissions to manage events."
-                            }
-                        </p>
-                        <p className="text-lg md:text-xl text-center mb-4 font-body font-medium text-neutral-700">
-                            Speak to admin to request permissions.
-                        </p>
+                        <div className="mx-auto max-w-xl px-2">
+                            <p className="text-lg md:text-xl mb-1 font-body font-medium text-neutral-700">
+                                {user.displayName ?
+                                    `You don't have the necessary permissions to manage events, ${user.displayName.split(" ")[0]}.`
+                                    :
+                                    "You don't have the necessary permissions to manage events."
+                                }
+                            </p>
+                            <p className="text-lg md:text-xl mb-4 font-body font-medium text-neutral-700 ">
+                                Speak to admin to request permissions.
+                            </p>
+                        </div>
                     </>
                 )}
 
                 {user && user.isStaff && (
                     <>
-                        <div className="text-center">
+                        <div className="text-center mx-auto max-w-xl px-2">
                             <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold mb-4">Manage Events</h1>
-                            <div className="text-lg md:text-lg mb-4 font-body font-medium text-neutral-800">
+                            <div className="text-lg md:text-lg mb-4 font-body font-medium text-neutral-700">
                                 <p>Welcome, {user.displayName.split(" ")[0]}</p>
-                                <p>You can create, update, and delete runs</p>
+                                <p>You can create a new run</p>
                             </div>
                         </div>
                         <NewEventForm />
