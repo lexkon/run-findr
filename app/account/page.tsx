@@ -24,7 +24,7 @@ export default async function Account() {
             <Header />
             <main className="m-4 p-2">
                 <h1 className="text-lg font-bold mb-4">Hey, {profile?.display_name || "runner"}</h1>
-                <h2>{profile?.is_staff ? <Link href="/new-event">Create a new event</Link> : null}</h2>
+                <h2>{profile?.is_staff ? <Link href="/new">Create a new event</Link> : null}</h2>
             </main>
         </>
     )
