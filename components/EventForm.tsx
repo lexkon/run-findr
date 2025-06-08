@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import { supabase } from "@/lib/supabase-client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { RunningEvent } from "@/lib/types"
+import { uploadImage, saveEvent, deleteEvent } from "@/lib/actions"
 
 export default function EventForm({ run }: { run: RunningEvent | null }) {
     const router = useRouter()
@@ -23,7 +23,6 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
         newEventName: '',
         newEventId: '',
     })
-
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState<null | 'created' | 'updated' | 'deleted'>(null)
@@ -36,115 +35,46 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
 
         const isEditMode = !!run
 
-        if (!formData.eventImage && !isEditMode) {
-            setError('Please select an image')
-            setLoading(false)
-            return
-        }
-
-        let imageUrl = run?.image_url || ''
-
-        if (formData.eventImage) {
-            const now = new Date()
-            const fileExt = formData.eventImage.name.split('.').pop()
-            const newFileName = `${formData.eventName}_${formData.eventDate}_${now.toISOString()}.${fileExt}`
-            const filePath = `events/${newFileName}`
-
-            const { error: storageError } = await supabase
-                .storage
-                .from('run-images')
-                .upload(filePath, formData.eventImage, { upsert: true })
-
-            if (storageError) {
-                setError(storageError.message)
-                setLoading(false)
-                return
+        try {
+            let imageUrl = run?.image_url || ''
+            if (formData.eventImage) {
+                imageUrl = await uploadImage(formData.eventImage, formData.eventName, formData.eventDate)
+            } else if (!isEditMode) {
+                throw new Error('Please select an image')
             }
 
-            const { data: publicUrlData } = supabase
-                .storage
-                .from('run-images')
-                .getPublicUrl(filePath)
+            const { id, eventName } = await saveEvent({
+                eventName: formData.eventName,
+                eventDescription: formData.eventDescription,
+                eventLocation: formData.eventLocation,
+                eventDistance: formData.eventDistance,
+                eventDate: formData.eventDate,
+                eventTime: formData.eventTime,
+            }, imageUrl, run?.id)
 
-            imageUrl = publicUrlData?.publicUrl || ''
-        }
-
-        const trimmedForm = {
-            eventName: formData.eventName.trim(),
-            eventDescription: formData.eventDescription.trim(),
-            eventLocation: formData.eventLocation.trim(),
-            eventDistance: formData.eventDistance.toString().trim(),
-            eventDate: formData.eventDate,
-            eventTime: formData.eventTime,
-        }
-
-        if (isEditMode) {
-            const { error: updateError } = await supabase
-                .from('running_events')
-                .update({
-                    event_name: trimmedForm.eventName,
-                    description: trimmedForm.eventDescription,
-                    location: trimmedForm.eventLocation,
-                    distance: trimmedForm.eventDistance,
-                    event_date: trimmedForm.eventDate,
-                    event_time: trimmedForm.eventTime,
-                    image_url: imageUrl,
-                })
-                .eq('id', run.id)
-
-            if (updateError) {
-                setError(updateError.message)
-                setLoading(false)
-                return
-            }
-
-            setSuccess('updated')
-            router.push(`/run/${run.id}`)
-
-        } else {
-            const { data: insertData, error: insertError } = await supabase
-                .from('running_events')
-                .insert([{
-                    event_name: trimmedForm.eventName,
-                    description: trimmedForm.eventDescription,
-                    location: trimmedForm.eventLocation,
-                    distance: trimmedForm.eventDistance,
-                    event_date: trimmedForm.eventDate,
-                    event_time: trimmedForm.eventTime,
-                    image_url: imageUrl,
-                }])
-                .select()
-
-            if (insertError) {
-                setError(insertError.message)
-                setLoading(false)
-                return
-            }
-
-            setNewEvent({
-                newEventId: insertData?.[0].id,
-                newEventName: insertData?.[0].event_name,
+            setNewEvent({ newEventId: id, newEventName: eventName })
+            setSuccess(isEditMode ? 'updated' : 'created')
+            setFormData({
+                eventName: '',
+                eventDescription: '',
+                eventLocation: '',
+                eventDistance: '',
+                eventDate: '',
+                eventTime: '',
+                eventImage: null,
             })
 
-            setSuccess('created')
+            router.push(`/run/${id}`)
+        } catch (err: any) {
+            setError(err.message || 'Something went wrong')
+        } finally {
+            setLoading(false)
         }
-
-        setLoading(false)
-
-        setFormData({
-            eventName: '',
-            eventDescription: '',
-            eventLocation: '',
-            eventDistance: '',
-            eventDate: '',
-            eventTime: '',
-            eventImage: null,
-        })
     }
+
 
     const handleDelete = async () => {
         if (!run) return
-
         const confirmed = confirm(`Are you sure you want to delete ${run.event_name}?`)
         if (!confirmed) return
 
@@ -153,25 +83,16 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
         setLoading(true)
 
         try {
-            const { error: deleteError } = await supabase
-                .from('running_events')
-                .delete()
-                .eq('id', run.id)
-
-            if (deleteError) {
-                setError(deleteError.message)
-                setLoading(false)
-                return
-            }
-
+            await deleteEvent(run.id)
             setSuccess('deleted')
-            setLoading(false)
             router.push('/')
         } catch (err: any) {
             setError(err.message || 'Failed to delete event')
+        } finally {
             setLoading(false)
         }
     }
+
 
     useEffect(() => {
         if (run) {
