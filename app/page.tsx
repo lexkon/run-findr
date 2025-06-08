@@ -1,12 +1,11 @@
 'use client'
 
 import Header from "@/components/Header";
-import EventCard from "@/components/EventCard";
 import EventList from "@/components/EventList";
 import { useUser } from "@/context/UserContext";
 
 export default function Home() {
-  const { user, loading } = useUser()
+  const { user } = useUser()
 
   return (
     <>

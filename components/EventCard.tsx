@@ -2,7 +2,6 @@
 
 import type { RunningEvent } from '@/lib/types'
 import Image from 'next/image'
-import LoadingCard from './LoadingCard'
 import { formatDateWithWeekdayOrdinal, formatDistance, formatTime } from '@/lib/utils'
 
 interface Props {

@@ -65,8 +65,12 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
             })
 
             router.push(`/run/${id}`)
-        } catch (err: any) {
-            setError(err.message || 'Something went wrong')
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message || 'Something went wrong')
+            } else {
+                setError('Something went wrong')
+            }
         } finally {
             setLoading(false)
         }
@@ -86,8 +90,12 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
             await deleteEvent(run.id)
             setSuccess('deleted')
             router.push('/')
-        } catch (err: any) {
-            setError(err.message || 'Failed to delete event')
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message || 'Failed to delete event')
+            } else {
+                setError('Failed to delete event')
+            }
         } finally {
             setLoading(false)
         }
