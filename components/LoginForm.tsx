@@ -28,7 +28,7 @@ export default function LoginForm({ successPage }: { successPage: string }) {
             setError(error.message)
         } else {
             setSuccess(true)
-            successPage === '/staff' ? router.refresh : router.push(successPage)
+            successPage === '/new' ? router.refresh() : router.push(successPage)
         }
 
         setLoading(false)

@@ -44,7 +44,7 @@ export default async function EditPage({ params }: EditPageProps) {
         <>
             <Header />
             <main className="mb-16 mx-auto p-6">
-                <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center md:mb-8 mb-2">
+                <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center md:mb-6 mb-2">
                     Update {run.event_name}
                 </h1>
                 <p className="font-body font-medium text-lg text-center text-neutral-700 md:mb-8 mb-4 mx-auto max-w-xl px-2">

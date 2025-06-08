@@ -103,7 +103,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         </Link>
     )
 
-    if (user.isStaff && isSignedUp) {
+    if (user.isStaff) {
         return (
             <div>
                 {isSignedUp ? (

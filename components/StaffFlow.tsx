@@ -1,5 +1,4 @@
 import { createSupabaseServerClient } from "@/lib/supabase-server";
-import { redirect } from "next/navigation";
 import EventForm from "@/components/EventForm";
 import LoginForm from "@/components/LoginForm";
 
@@ -12,9 +11,9 @@ export default async function StaffFlow() {
     if (!user) {
         return (
             <>
-                <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Staff</h1>
+                <h1 className="font-heading text-center text-electric-violet-600 text-4xl md:text-6xl font-semibold mb-4">Create a new run</h1>
                 <p className="text-lg text-center mb-4 font-body font-medium text-neutral-700">You need to log in to access this page</p>
-                <LoginForm successPage={"/staff"} />
+                <LoginForm successPage={"/new"} />
             </>
         );
     }
