@@ -4,10 +4,11 @@ import Header from "@/components/Header"
 import EventForm from "@/components/EventForm"
 
 type EditPageProps = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
-export default async function EditPage({ params }: EditPageProps) {
+export default async function EditPage(props: EditPageProps) {
+    const params = await props.params;
     const redirectUrl = `/run/${params.id}`
 
     const supabase = await createSupabaseServerClient()
