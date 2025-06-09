@@ -163,7 +163,8 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
             <div>
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Distance</label>
                 <input
-                    type="number"
+                    type='number'
+                    step='true'
                     required
                     min={0}
                     placeholder="In km"

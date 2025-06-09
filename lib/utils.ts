@@ -34,17 +34,29 @@ export function formatTime(timeString: string) {
 }
 
 export function formatDistance(km: number): string {
-    if (km <= 0) return "Invalid distance"
+    if (km <= 0 || Number.isNaN(km)) return "Invalid distance"
 
-    const labels: Record<number, string> = {
+    const distances: Record<number, string> = {
         1: "1 kilometre",
-        1.6: "Mile",
+        2: "2K",
+        3: "3K",
         5: "5K",
+        7: "4 miles",
+        8: "8K",
         10: "10K",
+        12: "8 miles",
+        13: "8 miles",
+        15: "15K",
         16: "10 miles",
         21: "Half marathon",
+        25: "25K",
+        30: "30K",
         42: "Marathon",
+        50: "50K",
+        80: "50 miles",
+        100: "100K",
+        160: "100 miles",
     }
 
-    return labels[km] ?? `${km}K`
+    return distances[km] ?? `${km}K`
 }

@@ -21,7 +21,9 @@ export default async function Account() {
 
     const staffControls = (
         <div className="font-body mb-6">
-            <p className="mb-6 font-medium text-neutral-800">FYI, you have staff privileges</p>
+            <p className="mb-6 font-medium text-neutral-700">
+                <span className="pl-2 py-2 pr-3 bg-green-700/20  rounded-md">FYI, you have staff privileges</span>
+            </p>
             <Link href="/new" className="py-2.5 px-4 text-white font-medium bg-electric-violet-400 rounded-md hover:cursor-pointer">Create a new event</Link>
         </div>
     )
