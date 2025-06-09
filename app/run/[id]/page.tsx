@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
-import Header from '@/components/Header'
 import Image from 'next/image'
+import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { formatDateWithWeekdayOrdinal, formatTime, formatDistance } from '@/lib/utils'
+import Header from '@/components/Header'
 import EventSignUpFlow from '@/components/EventSignUpFlow'
 
 type RunPageProps = {

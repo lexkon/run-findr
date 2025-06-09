@@ -11,6 +11,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
     const { user, loading } = useUser()
     const [isSignedUp, setIsSignedUp] = useState(false)
     const [loadingStatus, setLoadingStatus] = useState(true)
+    const trimmedName = user?.displayName.split(' ')[0]
 
     useEffect(() => {
         if (!user) {
@@ -59,6 +60,21 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         setIsSignedUp(true)
     }
 
+    const handleLeaveRun = async () => {
+
+        const { error } = await supabase
+            .from('signups')
+            .delete()
+            .eq('user_id', user?.id)
+            .eq('running_event_id', runningEventId)
+
+        if (error) {
+            alert("Something went wrong with leaving the event")
+        }
+
+        setIsSignedUp(false)
+    }
+
     const handleDownloadICS = () => {
         const start = new Date(`${run.event_date}T${run.event_time}`).toISOString()
         const end = new Date(new Date(start).getTime() + 60 * 60 * 1000).toISOString()
@@ -81,9 +97,15 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
     const signedUpMsg = (
         <>
             <p className="text-electric-violet-600 font-body font-semibold text-md mb-2 md:text-lg">
-                {`You're signed up, ${user.displayName.split(" ")[0]}!`}
+                {`You're signed up, ${trimmedName || ""}!`}
             </p>
         </>
+    )
+
+    const leaveRunBtn = (
+        <button onClick={handleLeaveRun} className="mx-2 p-2 px-4 text-white font-medium bg-rose-900 rounded-md hover:cursor-pointer">
+            Cancel your signup
+        </button>
     )
     const addToCalendarBtn = (
         <button onClick={handleDownloadICS} className="my-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
@@ -91,31 +113,41 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         </button>
     )
     const joinBtn = (
-        <button onClick={handleRunSignup} className="mt-2 p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
+        <button onClick={handleRunSignup} className="p-2 px-4 text-white font-medium bg-electric-violet-700 rounded-md hover:cursor-pointer">
             Join this run
         </button>
     )
     const editBtn = (
-        <Link
-            href={`${runningEventId}/edit`}
-            className="m-2 py-2.5 px-4 text-white font-medium bg-electric-violet-400 rounded-md hover:cursor-pointer">
-            Edit run details
-        </Link>
+        <>
+            <br></br>
+            <Link
+                href={`${runningEventId}/edit`
+                }
+                className="py-2.5 px-4 text-white font-medium bg-electric-violet-400 rounded-md hover:cursor-pointer" >
+                Edit run details
+            </Link >
+        </>
     )
 
     if (user.isStaff) {
         return (
-            <div>
-                {isSignedUp ? (
-                    <>
-                        {signedUpMsg}
-                        {addToCalendarBtn}
-                    </>
-                ) : (
-                    joinBtn
-                )}
-                {editBtn}
-            </div>
+            <>
+                <div>
+                    {isSignedUp ? (
+                        <>
+                            {signedUpMsg}
+                            {addToCalendarBtn} {leaveRunBtn}
+                        </>
+                    ) : (
+                        <>
+                            {joinBtn}
+                            <div className="my-2"></div>
+                        </>
+                    )}
+                    <div className="-my-4"></div>
+                    {editBtn}
+                </div>
+            </>
         )
     }
 
@@ -123,7 +155,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         return (
             <>
                 {signedUpMsg}
-                {addToCalendarBtn}
+                {addToCalendarBtn} {leaveRunBtn}
             </>
         )
     }

@@ -24,6 +24,7 @@ export default function EventList() {
                 .select('*')
                 .gte('event_date', today)
                 .order('event_date', { ascending: true })
+                .order('event_time', { ascending: true })
 
             if (data) setEvents(data as RunningEvent[])
         } catch (error) {

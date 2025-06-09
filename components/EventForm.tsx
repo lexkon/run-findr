@@ -127,7 +127,7 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
                     type="text"
                     required
                     autoCapitalize="words"
-                    placeholder="Manchester Marathon"
+                    placeholder="Upcoming Run"
                     value={formData.eventName}
                     onChange={(e) => setFormData({ ...formData, eventName: e.target.value })}
                     className="w-full px-3 py-2 border border-electric-violet-950 rounded"
@@ -165,6 +165,7 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
                 <input
                     type="number"
                     required
+                    min={0}
                     placeholder="In km"
                     value={formData.eventDistance}
                     onChange={(e) => setFormData({ ...formData, eventDistance: e.target.value })}
