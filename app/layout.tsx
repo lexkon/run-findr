@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Outfit, Bebas_Neue } from "next/font/google";
 import { UserProvider } from "@/context/UserContext";
+import { Analytics } from "@vercel/analytics/next"
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         <UserProvider>
           {children}
+          <Analytics />
         </UserProvider>
       </body>
     </html>
