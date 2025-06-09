@@ -13,38 +13,43 @@ type UserEventsProps = {
 
 export default function UserEvents({ userId }: UserEventsProps) {
 
-    const loadingCardCount = 12
+    const loadingCardCount = 4
     const [events, setEvents] = useState<RunningEvent[]>([])
     const [isLoading, setIsLoading] = useState(true)
-
-    type SignupWithEvent = {
-        running_events: RunningEvent[]
-    }
 
     const getUserEvents = async () => {
         try {
             setIsLoading(true)
 
-            const today = new Date().toISOString().split("T")[0]
-
-            const { data, error } = await supabase
+            const { data: signups, error: signupsError } = await supabase
                 .from('signups')
-                .select('running_events(*)')
+                .select('running_event_id')
                 .eq('user_id', userId)
 
-            if (error) throw error
+            if (signupsError) throw signupsError
 
-            const signups = data as SignupWithEvent[] | null
+            const eventIds = signups?.map(signup => signup.running_event_id) ?? []
 
-            const events = (signups || [])
-                .map((signup) => signup.running_events[0])
-                .filter(
-                    (event): event is RunningEvent =>
-                        !!event && event.event_date >= today
-                )
-                .sort((a, b) => a.event_date.localeCompare(b.event_date))
 
-            setEvents(events)
+            if (eventIds.length === 0) {
+                setEvents([])
+                return
+            }
+
+            const today = new Date().toISOString().split("T")[0]
+
+            const { data: events, error: eventsError } = await supabase
+                .from('running_events')
+                .select('*')
+                .in('id', eventIds)
+                .gte('event_date', today)
+                .order('event_date', { ascending: true })
+                .order('event_time', { ascending: true })
+
+            if (eventsError) throw eventsError
+
+            setEvents(events as RunningEvent[] ?? [])
+
         } catch (error) {
             console.warn('Error fetching user events:', error)
         } finally {
