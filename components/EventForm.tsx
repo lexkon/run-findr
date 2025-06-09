@@ -167,7 +167,7 @@ export default function EventForm({ run }: { run: RunningEvent | null }) {
                     step='true'
                     required
                     min={0}
-                    placeholder="In km"
+                    placeholder="Nearest whole KM"
                     value={formData.eventDistance}
                     onChange={(e) => setFormData({ ...formData, eventDistance: e.target.value })}
                     className="w-full px-3 py-2 border border-electric-violet-950 rounded"
