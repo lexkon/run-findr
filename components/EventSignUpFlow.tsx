@@ -99,7 +99,7 @@ export default function SignupFlow({ runningEventId, run }: { runningEventId: st
         <Link
             href={`${runningEventId}/edit`}
             className="m-2 py-2.5 px-4 text-white font-medium bg-electric-violet-400 rounded-md hover:cursor-pointer">
-            Edit Run Details
+            Edit run details
         </Link>
     )
 

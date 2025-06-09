@@ -29,6 +29,7 @@ export default async function RunPage({ params }: RunPageProps) {
                         src={run.image_url}
                         alt={`Photo of ${run.event_name.split(" ")[0]}`}
                         fill={true}
+                        priority={true}
                         className='object-cover mask-radial-[60%_80%] mask-radial-from-75% mask-radial-at-right'
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#f7f7f7] via-electric-violet-75/10 to-transparent z-0" />

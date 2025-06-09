@@ -20,7 +20,7 @@ export function generateICS({ title, description = '', location = '', start, end
         'END:VCALENDAR'
     ].join('\n')
 
-    const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' })
+    const blob = new Blob([content], { type: 'text/calendarcharset=utf-8' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url

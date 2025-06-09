@@ -24,5 +24,5 @@ export default function LoadingCard() {
                 </ul>
             </div>
         </div>
-    );
+    )
 }

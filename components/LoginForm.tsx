@@ -44,7 +44,7 @@ export default function LoginForm({ successPage }: { successPage: string }) {
                 <label className="block text-md font-medium text-electric-violet-800 mb-1">Email</label>
                 <input
                     type="email"
-                    autoComplete='on'
+                    autoComplete='email'
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}

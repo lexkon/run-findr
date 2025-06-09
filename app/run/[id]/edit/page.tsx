@@ -8,7 +8,7 @@ type EditPageProps = {
 }
 
 export default async function EditPage(props: EditPageProps) {
-    const params = await props.params;
+    const params = await props.params
     const redirectUrl = `/run/${params.id}`
 
     const supabase = await createSupabaseServerClient()

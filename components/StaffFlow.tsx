@@ -1,12 +1,12 @@
-import { createSupabaseServerClient } from "@/lib/supabase-server";
-import EventForm from "@/components/EventForm";
-import LoginForm from "@/components/LoginForm";
+import { createSupabaseServerClient } from "@/lib/supabase-server"
+import EventForm from "@/components/EventForm"
+import LoginForm from "@/components/LoginForm"
 
 export default async function StaffFlow() {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient()
     const {
         data: { user },
-    } = await supabase.auth.getUser();
+    } = await supabase.auth.getUser()
 
     if (!user) {
         return (
@@ -15,17 +15,17 @@ export default async function StaffFlow() {
                 <p className="text-lg text-center mb-4 font-body font-medium text-neutral-700">You need to log in to access this page</p>
                 <LoginForm successPage={"/new"} />
             </>
-        );
+        )
     }
 
     const { data: userData, error } = await supabase
         .from("users")
         .select("is_staff, display_name")
         .eq("id", user.id)
-        .single();
+        .single()
 
     if (error || !userData?.is_staff) {
-        const firstName = userData?.display_name?.split(" ")[0] ?? "";
+        const firstName = userData?.display_name?.split(" ")[0] ?? ""
         return (
             <>
                 <h1 className="font-heading text-electric-violet-600 text-4xl md:text-6xl font-semibold text-center mb-4">Unauthorised</h1>
@@ -40,10 +40,10 @@ export default async function StaffFlow() {
                     </p>
                 </div>
             </>
-        );
+        )
     }
 
-    const firstName = userData.display_name?.split(" ")[0] ?? "Staff";
+    const firstName = userData.display_name?.split(" ")[0] ?? "Staff"
 
     return (
         <>
@@ -56,5 +56,5 @@ export default async function StaffFlow() {
             </div>
             <EventForm run={null} />
         </>
-    );
+    )
 }

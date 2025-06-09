@@ -34,7 +34,7 @@ export function formatTime(timeString: string) {
 }
 
 export function formatDistance(km: number): string {
-    if (km <= 0) return "Invalid distance";
+    if (km <= 0) return "Invalid distance"
 
     const labels: Record<number, string> = {
         1: "1 kilometre",
@@ -44,7 +44,7 @@ export function formatDistance(km: number): string {
         16: "10 miles",
         21: "Half marathon",
         42: "Marathon",
-    };
+    }
 
-    return labels[km] ?? `${km}K`;
+    return labels[km] ?? `${km}K`
 }

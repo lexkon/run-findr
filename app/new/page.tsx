@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/Header"
 import StaffFlow from "@/components/StaffFlow"
 
 export default function NewEventPage() {
