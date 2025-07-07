@@ -1,3 +1,13 @@
+> [Link to live site](https://run-findr.vercel.app)
+
+<details>
+  <summary>Accounts</summary>
+Staff: staff@test.com p: stafftest <br>
+User: user@test.com p: Password123
+</details>
+
+
+---
 # Run Findr
 
 ## Features
